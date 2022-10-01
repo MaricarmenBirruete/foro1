@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '../api-rest.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,17 +9,19 @@ import { ApiRestService } from '../api-rest.service';
 export class HomeComponent implements OnInit {
 
   topics  = [{id:0, title:'', user_id:0},{id:1, title:'redes', user_id:2},
-  {id:2, title:'programacion', user_id:2}];
+  {id:2, title:'Programacion', user_id:2}];
   newTopic = {id:0, title:'', user_id:0};
   pages = [{url:'', label:'', active:false}];
   tmpTopic = {id:0, title:'', user_id:0};
   user = {id:0, username:'', role:''};
+
   constructor(private rest: ApiRestService) { }
 
   ngOnInit(): void {
     this.readTopics();
     this.rest.userObs$.subscribe( u => {this.user = u;});
   }
+
   readTopics(url:string =''){
     this.rest.getTopics(url).subscribe(
       r => {
@@ -62,5 +65,4 @@ export class HomeComponent implements OnInit {
     );
   }
 }
-
 

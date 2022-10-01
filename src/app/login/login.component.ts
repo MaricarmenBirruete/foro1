@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiRestService } from '../api-rest.service';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -30,5 +30,6 @@ export class LoginComponent implements OnInit {
         this.msg.error("Error en el nombre o contraseña", error.status)
       }
     );
+
   }
 }

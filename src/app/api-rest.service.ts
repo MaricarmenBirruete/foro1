@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject} from 'rxjs';
 
 const URL = "https://devel.cdhidalgo.tecnm.mx/~iraic/foro-rest";
-interface User { 
+
+interface User {
   id:number,
   username:string,
   role:string
 }
 interface Login {
   user:User,
-token:string
- }
+  token:string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class ApiRestService {
   userObs$ =this.userObs.asObservable();
 
   constructor(private http: HttpClient) { }
-
+  
   setUser(user:User){
     localStorage.setItem('id', user.id.toString());
     localStorage.setItem('username', user.username);
@@ -38,10 +39,11 @@ export class ApiRestService {
     return this.user;
   }
 
-  login(user:string, pass:string) { 
-     return this.http.get<Login>(URL+'/login', 
-      { params: {username:user, password:pass}});
+  login(user:string, pass:string){
+    return this.http.get<Login>(URL+'/login',
+      {params:{username:user, password:pass}});
   }
+
   //CRUD (create, read, update, delete)
   getTopics(url:string){
     if(url == '') url = URL+'/topics';
@@ -68,6 +70,4 @@ export class ApiRestService {
   }
 
 }
-
-
 
